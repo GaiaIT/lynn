@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>lynn</title>
+<meta name="_csrf" th:content="${_csrf.token}"/>
+<meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<script src="/js/lib/jquery.js"></script>
+<script src="/js/lib/d3.js"></script>
+<script src="/js/lib/async.js"></script>
+</head>
+<style>
+
+.node {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-width: 1.5px;
+}
+
+h3 {
+  font-size: 32pt;
+  margin-left: 1.302%;
+  margin-top: 1.302%;
+  margin-bottom: -0.64%;
+}
+
+</style>
+
+<body>
+	<h1>Lynn: Divination Matrix</h1>
+	<div id="menu">
+		<div><label>subject: </label><input type="text" id="subject"/></div>
+		<div>-----</div>
+		<div><label>hexagram: </label><input type="number" id="hexagram"/></div>
+		<div>-----</div>
+		<div>~OPTIONAL~</div>
+		<div>
+            <label>styles: </label>
+            <select id="configs">
+                <option>Default</option>
+            </select>
+        </div>
+		<div>-----</div>
+		<div><label>expiration: </label><input type="number" id="expiration" th:value="${sc.DEFAULT_EXPIRATION}" th:min="${sc.MIN_EXPIRATION}"/></div>
+		<div>-----</div>
+		<div><label>size: </label><input type="number" id="graphSize" th:value="${sc.DEFAULT_GRAPH_SIZE}" th:min="${sc.MIN_GRAPH_SIZE}" th:max="${sc.MAX_GRAPH_SIZE}"/></div>
+		<div>-----</div>
+		<div><label>edge threshold: </label><input type="number" id="edgeThreshold" th:value="${sc.DEFAULT_EDGE_THRESHOLD}" th:min="${sc.MIN_EDGE_THRESHOLD}" th:max="${sc.MAX_EDGE_THRESHOLD}"/></div>
+		<div>-----</div>
+		<div><label>node threshold: </label><input type="number" id="nodeThreshold" th:value="${sc.DEFAULT_NODE_THRESHOLD}" th:min="${sc.MIN_NODE_THRESHOLD}" th:max="${sc.MAX_NODE_THRESHOLD}"/></div>
+		<div>-----</div>
+		<div><label>break probability: </label><input type="number" id="breakProbability" th:value="${sc.DEFAULT_BREAK_PROBABILITY}" th:min="${sc.MIN_BREAK_PROBABILITY}" th:max="${sc.MAX_BREAK_PROBABILITY}"/></div>
+		<div>-----</div>
+		<div><label>break threshold: </label><input type="number" id="breakThreshold" th:value="${sc.DEFAULT_BREAK_THRESHOLD}" th:min="${sc.MIN_BREAK_THRESHOLD}" th:max="${sc.MAX_BREAK_THRESHOLD}"/></div>
+		<div>-----</div>
+		<div><label>pieces: </label><input type="number" id="pieces" th:value="${sc.DEFAULT_PIECES}" th:min="${sc.MIN_PIECES}"/></div>
+        <div>-----</div>
+		<div><button id="submit-reading">submit reading</button></div>
+		<br></br>
+		Status:
+		<div id="status">Hiya <span sec:authentication="name"></span> :D</div>
+		<div id="username" sec:authentication="name" style="display: none;"></div>
+		<div>~~~~~</div>
+		Reading:
+		<div id="url">None!</div>
+	</div>
+	<div id="symbol"></div>
+</body>
+<noscript>
+	<h2 style="color: #ff0000">Sorry friend, you need JS for this!</h2>
+</noscript>
+<script src="/js/create.js"></script>
+</html>
